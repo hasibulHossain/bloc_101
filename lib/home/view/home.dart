@@ -48,10 +48,16 @@ class Home extends StatelessWidget {
               );
             }
 
+            if(state is HomeNoInternetState) {
+              return const Center(
+                child: Text('No internet'),
+              );
+            }
+
             return const Center(
               child: Text('Something went wrong.'),
             );
           },
-        ));
+        ),);
   }
 }

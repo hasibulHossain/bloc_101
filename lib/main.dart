@@ -4,6 +4,7 @@
 import 'package:bloc_one_o_one/home/bloc/bloc/home_bloc.dart';
 import 'package:bloc_one_o_one/home/view/home.dart';
 import 'package:bloc_one_o_one/services/bored_service.dart';
+import 'package:bloc_one_o_one/services/conectivity_service.dart';
 
 // Packages
 
@@ -42,12 +43,12 @@ class MyApp extends StatelessWidget {
       home: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(create: (context) => BoredService()),
+          RepositoryProvider(create: (context) => ConnectivityService()),
         ],
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => HomeBloc(context.read<BoredService>())..add(LoadApiEvent()),
-              child: Container(),
+              create: (context) => HomeBloc(context.read<BoredService>(), context.read<ConnectivityService>())..add(LoadApiEvent()),
             )
           ],
           child: Home(),
